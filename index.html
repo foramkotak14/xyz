@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Pookie ❤️</title>
+  <style>
+    :root {
+      --primary-pink: #ffafbd;
+      --accent-red: #ff4d6d;
+      --text-color: #5a1a2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #ffe5ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: var(--text-color);
+    }
+
+    /* Container for the "Browser" feel */
+    .window-frame {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      height: 600px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 4px solid #fff;
+    }
+
+    .browser-header {
+      background: #f1f1f1;
+      padding: 10px;
+      display: flex;
+      gap: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .red { background: #ff5f56; }
+    .yellow { background: #ffbd2e; }
+    .green { background: #27c93f; }
+
+    /* Content Area */
+    .content {
+      flex: 1;
+      padding: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #fff 0%, #ffeef2 100%);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--accent-red);
+      font-weight: 800;
+    }
+
+    .gif-container {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+
+    .gif-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      position: relative;
+      width: 100%;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-yes {
+      background: var(--accent-red);
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+    }
+
+    .btn-no {
+      background: #eee;
+      color: #777;
+      position: relative;
+    }
+
+    /* Progress Dots */
+    .progress {
+      display: flex;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .p-dot {
+      width: 8px;
+      height: 8px;
+      background: #ffd1dc;
+      border-radius: 50%;
+    }
+
+    .p-dot.active {
+      background: var(--accent-red);
+      transform: scale(1.3);
+    }
+
+    /* Animations */
+    @keyframes heartFloat {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      animation: heartFloat 3s linear forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="window-frame">
+    <div class="browser-header">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+
+    <div class="content" id="app">
+      </div>
+  </div>
+
+ <script>
+    const data = [
+      {
+        title: "Ready for 7 days?",
+        img: "https://media.tenor.com/KGnViErYaD8AAAAi/abra%C3%A7ourso.gif",
+        text: "I made this for my pookie...",
+        yes: "YES!",
+        no: "No"
+      },
+      {
+        title: "Happy Rose Day 🌹",
+        img: "https://media.tenor.com/g8hX5FCQUwUAAAAi/milk-mocha-bear-falling.gif",
+        text: "phool for my fool.",
+        yes: "Accept Rose",
+        no: "Too thorny"
+      },
+      {
+        title: "Happy Propose Day 💍",
+        img: "https://media.tenor.com/r5SSva1C2d4AAAAj/milk-and-mocha.gif",
+        text: "Will you be mine for the next 100 years?",
+        yes: "YES",
+        no: "Ask again"
+      },
+      {
+        title: "Happy Chocolate Day 🍫",
+        img: "https://media1.tenor.com/m/C3tlPigi2t0AAAAC/mocha-and-milk-chocolate.gif",
+        text: "I ate ur chocolate otw... oops!",
+        yes: "Forgive me",
+        no: "Buy new one"
+      },
+      {
+        title: "Happy Promise Day 🤙",
+        img: "https://media1.tenor.com/m/gfvqqHmak90AAAAC/bear.gif", // Updated to a bear promise GIF
+        text: "I promise to stay by ur side forever.",
+        yes: "I Promise",
+        no: "Liar!"
+      },
+      {
+        title: "Happy Hug Day 🫂",
+        img: "https://media1.tenor.com/m/Mj69ACfVitYAAAAC/mocha-and-milk-bears-milk.gif",
+        text: "A big warm hug for my favorite person.",
+        yes: "Hug Back",
+        no: "Social Distancing"
+      },
+      {
+        title: "Happy Kiss Day 💋",
+        img: "https://media1.tenor.com/m/I76FWNvaAOMAAAAd/lpg.gif",
+        text: "Sending a million virtual kisses your way!",
+        yes: "Mwah! 😘",
+        no: "Gross"
+      }
+    ];
+
+    let step = 0;
+
+    function render() {
+      const app = document.getElementById('app');
+      const current = data[step];
+      
+      app.innerHTML = `
+        <div class="gif-container">
+          <img src="${current.img}" alt="cute-gif">
+        </div>
+        <h1>${current.title}</h1>
+        <p>${current.text}</p>
+        
+        <div class="btn-group">
+          <button class="btn-yes" onclick="nextStep()">${current.yes}</button>
+          <button class="btn-no" id="noBtn" onmouseover="moveNo()">${current.no}</button>
+        </div>
+
+        <div class="progress">
+          ${data.map((_, i) => `<div class="p-dot ${i === step ? 'active' : ''}"></div>`).join('')}
+        </div>
+      `;
+    }
+
+    function nextStep() {
+      createHearts();
+      if (step < data.length - 1) {
+        step++;
+        render();
+      } else {
+        document.getElementById('app').innerHTML = `
+          <div class="gif-container">
+            <img src="https://media1.tenor.com/m/EOCZQr9ke0EAAAAC/milk-and-mocha-milk-and-mocha-bear.gif" alt="celebration-gif">
+          </div>
+          <h1>Yay! Best Valentine Ever! ❤️</h1>
+          <p>I love you more than code!</p>
+        `;
+      }
+    }
+
+    function moveNo() {
+      const btn = document.getElementById('noBtn');
+      const x = Math.random() * (window.innerWidth - btn.offsetWidth) - (window.innerWidth/2 - 100);
+      const y = Math.random() * (window.innerHeight - btn.offsetHeight) - (window.innerHeight/2 - 100);
+      
+      btn.style.position = 'absolute';
+      btn.style.left = Math.min(Math.max(x, -100), 100) + 'px';
+      btn.style.top = Math.min(Math.max(y, -100), 100) + 'px';
+    }
+
+    function createHearts() {
+      for(let i=0; i<15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '100vh';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.animationDuration = (Math.random() * 2 + 1) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+
+    render();
+</script>
+</body>
+</html>
